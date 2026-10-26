@@ -10,27 +10,28 @@
 
     <title>VoltTech - Dispositivos Recondicionados</title>
 
-    <link rel="stylesheet" href="/Public/css/style.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
 
     <header class="navbar">
         <div class="logo">
-            <a href="#inicio">
-                <img src="/Public/img/VoltTech.png" alt="Logo VoltTech" class="logo-icon">
+            <a href="/">
+                <img src="/img/VoltTech.png" alt="Logo VoltTech" class="logo-icon">
                 <h1>VoltTech</h1>
             </a>
         </div>
 
         <nav class="nav-links">
-            <a href="#inicio">Início</a>
-            <a href="#produtos">Produtos</a>
+            <a href="/">Início</a>
+            <a href="/produtos">Produtos</a>
             <a href="#sobre">Sobre nós</a>
             <a href="#contato">Contato</a>
         </nav>
 
-        <a href="#admin" class="btn-admin">
+        <a href="/admin/dashboard" class="btn-admin">
             Área Administrativa
         </a>
     </header>
@@ -54,7 +55,7 @@
                     </p>
 
                     <div class="hero-buttons">
-                        <a href="#produtos" class="btn-primary">
+                        <a href="/produtos" class="btn-primary">
                             Ver Produtos
                         </a>
 
@@ -65,7 +66,7 @@
                 </div>
 
                 <div class="hero-image">
-                    <img src="/Public/img/ImagemLandingPage.png" alt="Dispositivos eletrônicos em uma mesa">
+                    <img src="/img/ImagemLandingPage.png" alt="Dispositivos eletrônicos em uma mesa">
                 </div>
 
             </div>
@@ -81,11 +82,33 @@
                     para o seu dia a dia.
                 </p>
 
-                <div id="mensagem-produtos" role="status" aria-live="polite">
-                    Carregando produtos...
-                </div>
-
-                <div class="products-grid" id="lista-produtos">
+                <div class="products-grid">
+                    <% if (produtos && produtos.length> 0) { %>
+                        <% produtos.forEach(produto=> { %>
+                            <article class="product-card">
+                                <div class="product-image">
+                                    <span>Produto recondicionado</span>
+                                </div>
+                                <h3>
+                                    <%= produto.nome %>
+                                </h3>
+                                <p>
+                                    <%= produto.marca || 'Marca não informada' %>
+                                </p>
+                                <p>Condição: <%= produto.condicao %>
+                                </p>
+                                <p class="product-price">
+                                    <%= Number(produto.preco).toLocaleString('pt-BR', { style: 'currency' ,
+                                        currency: 'BRL' }) %>
+                                </p>
+                                <p>
+                                    <%= produto.quantidade> 0 ? 'Disponível em estoque' : 'Indisponível' %>
+                                </p>
+                            </article>
+                            <% }) %>
+                                <% } else { %>
+                                    <p>Nenhum produto disponível no momento.</p>
+                                    <% } %>
                 </div>
 
             </div>
@@ -174,12 +197,10 @@
 
     <footer>
         <p>
-            &copy; <span id="ano-atual"></span> VoltTech.
-            Todos os direitos reservados.
+            &copy; <%= new Date().getFullYear() %> VoltTech.
+                Todos os direitos reservados.
         </p>
     </footer>
-
-    <script src="/js/script.js" defer></script>
 
 </body>
 

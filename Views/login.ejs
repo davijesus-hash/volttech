@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltTech - Login Administrativo</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body class="admin-body">
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="logo logo-center">
+                <img src="/img/VoltTech.png" alt="Logo VoltTech" class="logo-icon">
+                <h1>VoltTech</h1>
+            </div>
+
+            <h2>Acesso Restrito</h2>
+            <p>Entre com suas credenciais de administrador</p>
+
+            <% if (erro) { %>
+                <div class="alert-error">
+                    <%= erro %>
+                </div>
+                <% } %>
+
+                    <form action="/admin/login" method="POST" class="form-login">
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" required placeholder="admin@volttech.com.br">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="senha">Senha</label>
+                            <input type="password" id="senha" name="senha" required placeholder="••••••••">
+                        </div>
+
+                        <button type="submit" class="btn-primary btn-full">Entrar no Sistema</button>
+                    </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
