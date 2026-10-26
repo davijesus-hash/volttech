@@ -17,7 +17,9 @@ body {
 /* NAVBAR */
 .navbar {
     display: flex;
+    width: 100%;
     justify-content: space-between;
+    position: fixed;
     align-items: center;
     padding: 16px 6%;
     background-color: #ffffff;
@@ -79,8 +81,10 @@ body {
 
 /* HERO SECTION */
 .hero-section {
+    display: flex;
     padding: 50px 6% 60px 6%;
     color: #ffffff;
+    height: 100vh;  
 }
 
 .hero-container {
@@ -326,7 +330,7 @@ footer {
     .hero-image {
         justify-content: center;
     }
-
+    
     .cards-grid {
         grid-template-columns: 1fr;
     }
