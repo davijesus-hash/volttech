@@ -1,0 +1,337 @@
+/* ==========================================================================
+   VOLTTECH - STYLE.CSS (CORRIGIDO)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+body {
+    background-color: #0b7c93;
+    color: #333333;
+    line-height: 1.5;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 6%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    margin-right: -4px;
+    border-radius: 8px;
+}
+
+.logo h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0b7c93;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #2b2b2b;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #0b7c93;
+}
+
+.btn-admin {
+    background-color: #1bbbe1;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-admin:hover {
+    background-color: #15a2c4;
+}
+
+/* HERO SECTION */
+.hero-section {
+    padding: 50px 6% 60px 6%;
+    color: #ffffff;
+}
+
+.hero-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.hero-text {
+    flex: 1.1;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+}
+
+.hero-text p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 520px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-primary {
+    background-color: #ffffff;
+    color: #0b7c93;
+    padding: 13px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #f0f8fa;
+}
+
+.btn-outline {
+    border: 1.5px solid #ffffff;
+    color: #ffffff;
+    padding: 13px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.hero-image {
+    flex: 0.9;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 480px;
+    height: 380px;
+    border-radius: 24px;
+    object-fit: cover;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+}
+
+/* PRODUCTS SECTION */
+.products-section {
+    padding: 60px 6%;
+    background-color: #f5f7fa;
+    text-align: center;
+}
+
+.products-container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.products-section h2 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: #202936;
+}
+
+.products-section p {
+    margin-bottom: 24px;
+    color: #4b5563;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.product-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product-image {
+    background-color: #edf2f7;
+    border-radius: 10px;
+    padding: 30px 16px;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.product-price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #0b7c93;
+    margin-top: 4px;
+}
+
+/* ABOUT SECTION */
+.about-section {
+    padding: 60px 6%;
+    background-color: #ffffff;
+}
+
+.about-card {
+    max-width: 1140px;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.subtitle {
+    color: #0b7c93;
+    font-size: 1.15rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.about-description {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #4a5568;
+    margin-bottom: 40px;
+}
+
+/* CARDS GRID */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card {
+    background-color: #f8fafc;
+    padding: 30px 24px;
+    border-radius: 16px;
+    border: 1px solid #edf2f7;
+    text-align: center;
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 16px;
+}
+
+.card p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #4a5568;
+}
+
+/* CONTACT & ADMIN SECTIONS (FUNDO AZUL COM TEXTO BRANCO) */
+.contact-section,
+#admin {
+    padding: 60px 6%;
+    max-width: 1140px;
+    margin: 0 auto;
+    color: #ffffff;
+    text-align: center;
+}
+
+.contact-section h2,
+#admin h2 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.contact-section p,
+#admin p {
+    font-size: 1rem;
+    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* FOOTER */
+footer {
+    padding: 24px 6%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 960px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text p {
+        margin: 0 auto 32px auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-image {
+        justify-content: center;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        display: none;
+    }
+}

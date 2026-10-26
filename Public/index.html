@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Na VoltTech você encontra produtos tecnológicos recondicionados, testados e com preços acessíveis.">
+
+    <title>VoltTech - Dispositivos Recondicionados</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <a href="#inicio">
+                <img src="/img/VoltTech.png" alt="Logo VoltTech" class="logo-icon">
+                <h1>VoltTech</h1>
+            </a>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#inicio">Início</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#sobre">Sobre nós</a>
+            <a href="#contato">Contato</a>
+        </nav>
+
+        <a href="#admin" class="btn-admin">
+            Área Administrativa
+        </a>
+    </header>
+
+    <main>
+
+        <section class="hero-section" id="inicio">
+            <div class="hero-container">
+
+                <div class="hero-text">
+                    <h1>
+                        Tecnologia de qualidade, preços inteligentes,
+                        uma nova vida para seus dispositivos.
+                    </h1>
+
+                    <p>
+                        A VoltTech oferece produtos recondicionados
+                        cuidadosamente selecionados, testados e preparados
+                        para oferecer desempenho, segurança e qualidade
+                        por um preço mais acessível.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#produtos" class="btn-primary">
+                            Ver Produtos
+                        </a>
+
+                        <a href="#contato" class="btn-outline">
+                            Fale Conosco
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <img src="/img/ImagemLandingPage.png" alt="Dispositivos eletrônicos em uma mesa">
+                </div>
+
+            </div>
+        </section>
+
+        <section class="products-section" id="produtos">
+            <div class="products-container">
+
+                <h2>Nossos produtos</h2>
+
+                <p>
+                    Tecnologia recondicionada, qualidade e economia
+                    para o seu dia a dia.
+                </p>
+
+                <div id="mensagem-produtos" role="status" aria-live="polite">
+                    Carregando produtos...
+                </div>
+
+                <div class="products-grid" id="lista-produtos">
+                </div>
+
+            </div>
+        </section>
+
+        <section class="about-section" id="sobre">
+            <div class="about-card">
+
+                <span class="subtitle">
+                    Sobre a <strong>VoltTech</strong>
+                </span>
+
+                <p class="about-description">
+                    A VoltTech nasceu para transformar a maneira como
+                    consumimos tecnologia. Acreditamos que um smartphone,
+                    laptop ou smartwatch de alta performance não precisa
+                    vir direto da fábrica para ser incrível.
+
+                    Através de um rigoroso processo de inspeção técnica,
+                    higienização e testes, damos nova vida a eletrônicos,
+                    oferecendo tecnologia de qualidade por preços mais
+                    acessíveis.
+
+                    Unimos tecnologia, transparência e responsabilidade
+                    ambiental para prolongar a vida útil dos dispositivos
+                    e contribuir para a redução do lixo eletrônico.
+                </p>
+
+                <div class="cards-grid">
+
+                    <div class="card">
+                        <h3>Missão</h3>
+                        <p>
+                            Democratizar o acesso à tecnologia de qualidade
+                            através do recondicionamento de excelência,
+                            oferecendo produtos com preços acessíveis e
+                            confiança para o consumidor.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Visão</h3>
+                        <p>
+                            Ser uma referência em eletrônicos
+                            recondicionados, incentivando um mercado de
+                            tecnologia mais sustentável e responsável.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Valores</h3>
+                        <p>
+                            Rigor técnico, transparência na classificação
+                            dos produtos, responsabilidade ambiental,
+                            satisfação do cliente e compromisso com
+                            a qualidade.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contato">
+            <h2>Entre em contato</h2>
+
+            <p>
+                Tem dúvidas sobre nossos produtos?
+                Entre em contato com a equipe VoltTech.
+            </p>
+
+            <a href="mailto:contato@volttech.com.br" class="btn-primary">
+                Enviar e-mail
+            </a>
+        </section>
+
+        <section id="admin">
+            <h2>Área administrativa</h2>
+            <p>
+                O gerenciamento de produtos e estoque deve ser feito
+                por uma área restrita a administradores autenticados.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            &copy; <span id="ano-atual"></span> VoltTech.
+            Todos os direitos reservados.
+        </p>
+    </footer>
+
+    <script src="/js/script.js" defer></script>
+
+</body>
+
+</html>
