@@ -28,27 +28,14 @@ app.use(
   })
 );
 
-// Middleware temporário de bypass / verificação de Admin
-function requerAdmin(req, res, next) {
-  // Se ainda não estiver logado, faz login automático temporário para desenvolvimento
-  if (!req.session || !req.session.usuario) {
-    req.session.usuario = {
-      id: 1,
-      nome: "Administrador (Dev)",
-      email: "admin@volttech.com.br",
-      permissao: "admin"
-    };
-  }
-  return next();
-}
-
 // Disponibiliza o usuário para as telas EJS
 app.use((req, res, next) => {
   res.locals.usuarioLogado = req.session.usuario || null;
   next();
 });
 
-// Módulos de API
+// Importação dos Módulos de Rotas
+const adminRoutes = require("./routes/admin");
 const produtosRoutes = require("./routes/produtos");
 const categoriasRoutes = require("./routes/categorias");
 const usuariosRoutes = require("./routes/usuarios");
@@ -56,55 +43,12 @@ const pedidosRoutes = require("./routes/pedidos");
 const estoqueRoutes = require("./routes/estoque");
 
 // ==========================================
-// ROTAS DE AUTENTICAÇÃO (MODO DEVTMP AUTO-LOGIN)
+// ROTAS MÓDULO ADMINISTRATIVO (/admin)
 // ==========================================
-
-// GET: Página de Login (Redireciona direto para o Dashboard com login automático)
-app.get("/admin/login", (req, res) => {
-  req.session.usuario = {
-    id: 1,
-    nome: "Administrador (Dev)",
-    email: "admin@volttech.com.br",
-    permissao: "admin"
-  };
-  res.redirect("/admin/dashboard");
-});
-
-// POST: Login Manual (Entra automático também)
-app.post("/admin/login", (req, res) => {
-  req.session.usuario = {
-    id: 1,
-    nome: "Administrador (Dev)",
-    email: "admin@volttech.com.br",
-    permissao: "admin"
-  };
-  res.redirect("/admin/dashboard");
-});
-
-// GET: Encerrar sessão (Logout)
-app.get("/admin/logout", (req, res) => {
-  req.session.destroy(() => {
-    res.redirect("/");
-  });
-});
-
-// POST: Criar Novo Administrador (Futuro)
-app.post("/admin/usuarios/novo", requerAdmin, async (req, res) => {
-  const { nome, email, senha } = req.body;
-  try {
-    await DB.query(
-      "INSERT INTO usuarios (nome, email, senha, permissao) VALUES ($1, $2, $3, 'admin')",
-      [nome, email, senha || "123456"]
-    );
-    res.redirect("/admin/dashboard");
-  } catch (erro) {
-    console.error("Erro ao cadastrar administrador:", erro);
-    res.redirect("/admin/dashboard");
-  }
-});
+app.use("/admin", adminRoutes);
 
 // ==========================================
-// ROTAS DE VISUALIZAÇÃO (EJS)
+// ROTAS PÚBLICAS DA LOJA (CLIENTE)
 // ==========================================
 
 // Landing Page
@@ -117,66 +61,68 @@ app.get("/", async (req, res) => {
   }
 });
 
-// Catálogo de Produtos
+// Catálogo Público (Apenas Visualização para Clientes)
 app.get("/produtos", async (req, res) => {
   try {
     const resultado = await DB.query("SELECT * FROM produtos ORDER BY id DESC");
-    res.render("produtos", {
-      produtos: resultado.rows,
-      totalProdutos: resultado.rowCount
-    });
+    res.render("produtos-publico", { produtos: resultado.rows });
   } catch (erro) {
     res.status(500).send("Erro ao carregar o catálogo de produtos.");
   }
 });
 
-// Dashboard Administrativo
-app.get("/admin/dashboard", requerAdmin, async (req, res) => {
+// ==========================================
+// ROTAS DE AUTENTICAÇÃO (LOGIN / LOGOUT)
+// ==========================================
+
+// GET: Tela de Login
+app.get("/login", (req, res) => {
+  if (req.session && req.session.usuario) {
+    return res.redirect("/admin/dashboard");
+  }
+  res.render("login", { erro: null });
+});
+
+// POST: Processar Login 
+app.post("/login", async (req, res) => {
+  const { email, senha } = req.body;
+
   try {
-    const resultadoProdutos = await DB.query("SELECT COUNT(*) FROM produtos");
-    const resultadoPedidos = await DB.query("SELECT COUNT(*) FROM pedidos");
-    
-    const resultadoEstoque = await DB.query(
-      "SELECT nome, quantidade FROM produtos ORDER BY quantidade DESC LIMIT 8"
+    const resultado = await DB.query(
+      `SELECT id, nome, email
+       FROM usuarios 
+       WHERE LOWER(email) = LOWER($1) 
+         AND senha = $2`,
+      [email ? email.trim() : '', senha]
     );
 
-    let movimentacoes = [];
-    try {
-      const resMov = await DB.query(`
-        SELECT m.id, p.nome AS produto, m.tipo, m.quantidade, m.criado_em 
-        FROM movimentacoes m
-        LEFT JOIN produtos p ON p.id = m.produto_id
-        ORDER BY m.criado_em DESC LIMIT 6
-      `);
-      movimentacoes = resMov.rows;
-    } catch (e) {
-      movimentacoes = [];
+    if (resultado.rows.length === 0) {
+      return res.render("login", {
+        erro: "E-mail ou senha inválidos"
+      });
     }
 
-    let usuarios = [];
-    try {
-      const resUser = await DB.query("SELECT id, nome, email FROM usuarios ORDER BY id DESC");
-      usuarios = resUser.rows;
-    } catch (e) {
-      usuarios = [];
-    }
+    // Grava a sessão com os dados do utilizador
+    req.session.usuario = resultado.rows[0];
 
-    res.render("dashboard", {
-      vendasMes: 24500.0,
-      totalPedidos: resultadoPedidos.rows[0].count || 0,
-      totalProdutos: resultadoProdutos.rows[0].count || 0,
-      produtosAltoEstoque: resultadoEstoque.rows,
-      movimentacoes: movimentacoes,
-      usuarios: usuarios
-    });
+    return res.redirect("/admin/dashboard");
   } catch (erro) {
-    console.error("Erro no dashboard:", erro);
-    res.status(500).send("Erro ao carregar o painel administrativo.");
+    console.error("Erro no login:", erro);
+    return res.render("login", {
+      erro: "Erro interno ao processar o login."
+    });
   }
 });
 
+// GET: Logout
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/login");
+  });
+});
+
 // ==========================================
-// ROTAS DA API & ERROS
+// ROTAS DE API REST & STATUS
 // ==========================================
 
 app.get("/api/saude", async (req, res) => {
@@ -194,6 +140,10 @@ app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/pedidos", pedidosRoutes);
 app.use("/api/estoque", estoqueRoutes);
 
+// ==========================================
+// TRATAMENTO DE ERROS E 404
+// ==========================================
+
 app.use((req, res) => {
   res.status(404).json({ erro: "Rota não encontrada." });
 });
@@ -202,6 +152,10 @@ app.use((erro, req, res, next) => {
   console.error(erro);
   res.status(500).json({ erro: "Erro interno no servidor." });
 });
+
+// ==========================================
+// INICIALIZAÇÃO DO SERVIDOR
+// ==========================================
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

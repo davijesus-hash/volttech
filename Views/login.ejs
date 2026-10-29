@@ -7,39 +7,39 @@
     <title>VoltTech - Login Administrativo</title>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body class="admin-body">
 
     <div class="login-wrapper">
         <div class="login-card">
-            <div class="logo logo-center">
-                <img src="/img/VoltTech.png" alt="Logo VoltTech" class="logo-icon">
-                <h1>VoltTech</h1>
-            </div>
-
-            <h2>Acesso Restrito</h2>
-            <p>Entre com suas credenciais de administrador</p>
+            <h2>VoltTech Admin</h2>
+            <p>Entre com suas credenciais para gerenciar o sistema</p>
 
             <% if (erro) { %>
-                <div class="alert-error">
+                <div class="error-alert">
                     <%= erro %>
                 </div>
                 <% } %>
 
-                    <form action="/admin/login" method="POST" class="form-login">
-                        <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" required placeholder="admin@volttech.com.br">
+                    <form action="/login" method="POST" style="display: flex; flex-direction: column; gap: 16px;">
+                        <div>
+                            <label class="label-placeholder">E-mail</label>
+                            <input type="email" name="email" placeholder="Digite seu E-mail" required
+                                class="input-dash">
                         </div>
-
-                        <div class="form-group">
-                            <label for="senha">Senha</label>
-                            <input type="password" id="senha" name="senha" required placeholder="••••••••">
+                        <div>
+                            <label class="label-placeholder">Senha</label>
+                            <input type="password" name="senha" placeholder="Digite sua senha" required
+                                class="input-dash">
                         </div>
-
-                        <button type="submit" class="btn-primary btn-full">Entrar no Sistema</button>
+                        <button type="submit" class="btn-salvar" style="width: 100%; margin-top: 8px;">Entrar</button>
                     </form>
+                    <div style="text-align: center; margin-top: 16px;">
+                        <a href="/" style="font-size: 0.85rem; color: #64748b; text-decoration: none;">&larr; Voltar
+                            para a loja</a>
+                    </div>
         </div>
     </div>
 

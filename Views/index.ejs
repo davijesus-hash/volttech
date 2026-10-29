@@ -72,48 +72,6 @@
             </div>
         </section>
 
-        <section class="products-section" id="produtos">
-            <div class="products-container">
-
-                <h2>Nossos produtos</h2>
-
-                <p>
-                    Tecnologia recondicionada, qualidade e economia
-                    para o seu dia a dia.
-                </p>
-
-                <div class="products-grid">
-                    <% if (produtos && produtos.length> 0) { %>
-                        <% produtos.forEach(produto=> { %>
-                            <article class="product-card">
-                                <div class="product-image">
-                                    <span>Produto recondicionado</span>
-                                </div>
-                                <h3>
-                                    <%= produto.nome %>
-                                </h3>
-                                <p>
-                                    <%= produto.marca || 'Marca não informada' %>
-                                </p>
-                                <p>Condição: <%= produto.condicao %>
-                                </p>
-                                <p class="product-price">
-                                    <%= Number(produto.preco).toLocaleString('pt-BR', { style: 'currency' ,
-                                        currency: 'BRL' }) %>
-                                </p>
-                                <p>
-                                    <%= produto.quantidade> 0 ? 'Disponível em estoque' : 'Indisponível' %>
-                                </p>
-                            </article>
-                            <% }) %>
-                                <% } else { %>
-                                    <p>Nenhum produto disponível no momento.</p>
-                                    <% } %>
-                </div>
-
-            </div>
-        </section>
-
         <section class="about-section" id="sobre">
             <div class="about-card">
 
@@ -183,14 +141,6 @@
             <a href="mailto:contato@volttech.com.br" class="btn-primary">
                 Enviar e-mail
             </a>
-        </section>
-
-        <section id="admin">
-            <h2>Área administrativa</h2>
-            <p>
-                O gerenciamento de produtos e estoque deve ser feito
-                por uma área restrita a administradores autenticados.
-            </p>
         </section>
 
     </main>

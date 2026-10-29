@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,8 @@
     <header class="navbar navbar-admin">
         <div class="logo">
             <a href="/admin/dashboard">
-                <img src="/img/VoltTech.png" alt="Logo VoltTech" class="logo-icon">
+                <img src="/img/VoltTech.png" alt="Logo VoltTech" class="logo-icon"
+                    onerror="this.src='https://via.placeholder.com/40'">
                 <div>
                     <h1>VoltTech</h1>
                     <span class="sub-logo">Dashboard</span>
@@ -24,31 +26,36 @@
         <div class="admin-header-right">
             <nav class="nav-links-admin">
                 <a href="/admin/categorias">Categorias</a>
-                <a href="/admin/estoque">Estoque</a>
+                <a href="/admin/produtos">Estoque</a>
                 <a href="/admin/usuarios">Usuários</a>
                 <a href="/admin/contato">Fale Conosco</a>
+                <a href="/logout" class="btn-logout">Sair</a>
             </nav>
             <span class="user-greeting">Bem-vindo, <strong>Administrador</strong></span>
         </div>
     </header>
 
     <main class="dashboard-container">
-        
+
         <!-- 1. Cards de Métricas Superiores -->
         <section class="metrics-grid">
             <div class="metric-card">
                 <p class="metric-label">Vendas no mês</p>
                 <h2 class="metric-value">
-                    <%= Number(vendasMes || 24500).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) %>
+                    <%= Number(vendasMes || 24500).toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
                 </h2>
             </div>
             <div class="metric-card">
                 <p class="metric-label">Pedidos</p>
-                <h2 class="metric-value"><%= totalPedidos || 0 %></h2>
+                <h2 class="metric-value">
+                    <%= totalPedidos || 0 %>
+                </h2>
             </div>
             <div class="metric-card">
                 <p class="metric-label">Produtos cadastrados</p>
-                <h2 class="metric-value"><%= totalProdutos || 0 %></h2>
+                <h2 class="metric-value">
+                    <%= totalProdutos || 0 %>
+                </h2>
             </div>
         </section>
 
@@ -56,7 +63,7 @@
         <section class="dashboard-content">
             <div class="dashboard-card chart-card">
                 <h3>Vendas nos últimos 30 dias</h3>
-                <div class="chart-container">
+                <div class="chart-container" style="position: relative; height: 280px;">
                     <canvas id="vendasChart"></canvas>
                 </div>
             </div>
@@ -64,53 +71,63 @@
             <div class="dashboard-card stock-card">
                 <h3>Atenção: <span>Alto estoque</span></h3>
                 <ul class="stock-list">
-                    <% if (produtosAltoEstoque && produtosAltoEstoque.length > 0) { %>
-                        <% produtosAltoEstoque.forEach(item => { %>
+                    <% if (produtosAltoEstoque && produtosAltoEstoque.length> 0) { %>
+                        <% produtosAltoEstoque.forEach(item=> { %>
                             <li class="stock-item">
                                 <div class="stock-info">
-                                    <strong><%= item.nome %></strong>
+                                    <strong>
+                                        <%= item.nome %>
+                                    </strong>
                                 </div>
                                 <div class="stock-qty">
-                                    <span>Qtd: <strong><%= item.quantidade %></strong></span>
+                                    <span>Qtd: <strong>
+                                            <%= item.quantidade %>
+                                        </strong></span>
                                 </div>
                             </li>
-                        <% }) %>
-                    <% } else { %>
-                        <li class="stock-item">Nenhum alerta de estoque.</li>
-                    <% } %>
+                            <% }) %>
+                                <% } else { %>
+                                    <li class="stock-item">Nenhum alerta de estoque.</li>
+                                    <% } %>
                 </ul>
             </div>
         </section>
 
         <!-- 3. Movimentações Recentes e Gerenciamento de Administradores -->
         <section class="dashboard-content">
-            
+
             <div class="dashboard-card">
                 <h3>Últimas <span>Movimentações</span></h3>
                 <ul class="stock-list">
-                    <% if (movimentacoes && movimentacoes.length > 0) { %>
-                        <% movimentacoes.forEach(mov => { %>
+                    <% if (movimentacoes && movimentacoes.length> 0) { %>
+                        <% movimentacoes.forEach(mov=> { %>
                             <li class="stock-item">
                                 <div class="stock-info">
-                                    <strong><%= mov.produto || 'Produto' %></strong>
-                                    <small><%= new Date(mov.criado_em).toLocaleDateString('pt-BR') %></small>
+                                    <strong>
+                                        <%= mov.produto || 'Produto' %>
+                                    </strong>
+                                    <small>
+                                        <%= new Date(mov.criado_em).toLocaleDateString('pt-BR') %>
+                                    </small>
                                 </div>
                                 <div class="stock-qty">
-                                    <span class="badge-mov <%= mov.tipo === 'entrada' ? 'badge-entrada' : 'badge-saida' %>">
-                                        <%= mov.tipo === 'entrada' ? '+' : '-' %><%= mov.quantidade %> un
+                                    <span
+                                        class="badge-mov <%= mov.tipo === 'entrada' ? 'badge-entrada' : 'badge-saida' %>">
+                                        <%= mov.tipo==='entrada' ? '+' : '-' %>
+                                            <%= mov.quantidade %> un
                                     </span>
                                 </div>
                             </li>
-                        <% }) %>
-                    <% } else { %>
-                        <li class="stock-item">Nenhuma movimentação.</li>
-                    <% } %>
+                            <% }) %>
+                                <% } else { %>
+                                    <li class="stock-item">Nenhuma movimentação.</li>
+                                    <% } %>
                 </ul>
             </div>
 
             <div class="dashboard-card">
                 <h3>Gerenciamento de <span>Administradores</span></h3>
-                <form action="/admin/usuarios/novo" method="POST" class="form-grid-admin">
+                <form action="/admin/usuarios/salvar" method="POST" class="form-grid-admin">
                     <input type="text" name="nome" placeholder="Nome Completo" required class="input-dash">
                     <input type="email" name="email" placeholder="E-mail" required class="input-dash">
                     <input type="password" name="senha" placeholder="Senha" required class="input-dash">
@@ -119,17 +136,21 @@
 
                 <h4 class="users-list-title">Administradores Cadastrados</h4>
                 <ul class="stock-list">
-                    <% if (usuarios && usuarios.length > 0) { %>
-                        <% usuarios.forEach(u => { %>
+                    <% if (usuarios && usuarios.length> 0) { %>
+                        <% usuarios.forEach(u=> { %>
                             <li class="stock-item">
                                 <div class="stock-info">
-                                    <strong><%= u.nome %></strong>
-                                    <small><%= u.email %></small>
+                                    <strong>
+                                        <%= u.nome %>
+                                    </strong>
+                                    <small>
+                                        <%= u.email %>
+                                    </small>
                                 </div>
                                 <span class="badge-admin">Ativo</span>
                             </li>
-                        <% }) %>
-                    <% } %>
+                            <% }) %>
+                                <% } %>
                 </ul>
             </div>
 
@@ -146,11 +167,11 @@
                 datasets: [{
                     label: 'Vendas',
                     data: [180, 290, 220, 200, 205, 180, 50],
-                    borderColor: '#8b5cf6',
-                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    borderColor: '#1bbbe1',
+                    backgroundColor: 'rgba(27, 187, 225, 0.1)',
                     borderWidth: 2,
                     tension: 0.3,
-                    pointBackgroundColor: '#8b5cf6'
+                    pointBackgroundColor: '#1bbbe1'
                 }]
             },
             options: {
@@ -165,4 +186,5 @@
         });
     </script>
 </body>
+
 </html>

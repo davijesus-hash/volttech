@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VoltTech - Fale Conosco</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body class="admin-body">
+    <header class="navbar navbar-admin">
+        <div class="logo">
+            <a href="/admin/dashboard">
+                <img src="/img/VoltTech.png" alt="VoltTech" class="logo-icon"
+                    onerror="this.src='https://via.placeholder.com/40'">
+                <div>
+                    <h1>VoltTech</h1>
+                    <span class="sub-logo">Fale Conosco</span>
+                </div>
+            </a>
+        </div>
+        <div class="admin-header-right">
+            <nav class="nav-links-admin">
+                <a href="/admin/categorias">Categorias</a>
+                <a href="/admin/produtos">Estoque</a>
+                <a href="/admin/usuarios">Usuários</a>
+                <a href="/admin/contato">Fale Conosco</a>
+                <a href="/logout" class="btn-logout">Sair</a>
+            </nav> 
+            <span class="user-greeting">Bem-vindo, <strong><%= usuarioLogado ? usuarioLogado.nome : 'Administrador' %></strong></span>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-card table-card">
+            <h3 style="padding: 20px 20px 0 20px;">Mensagens Recebidas</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>NOME</th>
+                        <th>E-MAIL</th>
+                        <th>MENSAGEM</th>
+                        <th>DATA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (mensagens && mensagens.length> 0) { %>
+                        <% mensagens.forEach(m=> { %>
+                            <tr>
+                                <td><strong>
+                                        <%= m.nome %>
+                                    </strong></td>
+                                <td>
+                                    <%= m.email %>
+                                </td>
+                                <td>
+                                    <%= m.mensagem %>
+                                </td>
+                                <td>
+                                    <%= new Date(m.criado_em).toLocaleDateString('pt-BR') %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="4" class="text-center">Nenhuma mensagem recebida no momento.</td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

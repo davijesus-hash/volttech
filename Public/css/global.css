@@ -127,3 +127,21 @@ footer {
         display: none;
     }
 }
+
+/* Estilo do botão de Logout na navbar */
+.nav-links .btn-logout {
+    color: #ff4d4d;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 77, 77, 0.4);
+    border-radius: 6px;
+    margin-left: 12px;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-links .btn-logout:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border-color: #ff4d4d;
+}

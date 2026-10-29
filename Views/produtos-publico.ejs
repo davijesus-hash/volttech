@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Na VoltTech você encontra produtos tecnológicos recondicionados, testados e com preços acessíveis.">
+
+    <title>VoltTech - Produtos</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/produtos.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="/img/VoltTech.png" alt="Logo VoltTech" class="logo-icon">
+                <h1>VoltTech</h1>
+            </a>
+        </div>
+
+        <nav class="nav-links">
+            <a href="/">Início</a>
+            <a href="/produtos" class="active">Produtos</a>
+            <a href="/#sobre">Sobre nós</a>
+            <a href="/#contato">Contato</a>
+        </nav>
+
+        <a href="/admin/dashboard" class="btn-admin">
+            Área Administrativa
+        </a>
+    </header>
+
+    <main class="catalog-container">
+        <div class="catalog-controls">
+            <div class="filter-group">
+                <h2 style="color: #ffffff; font-size: 1.6rem;">Nosso Catálogo</h2>
+            </div>
+        </div>
+
+        <section class="products-grid-catalog" style="margin-top: 24px;">
+            <% if (produtos && produtos.length> 0) { %>
+                <% produtos.forEach(p=> { %>
+                    <div class="product-card-catalog">
+                        <div class="product-card-image">
+                            <img src="<%= p.imagem_url || 'https://via.placeholder.com/300' %>" alt="<%= p.nome %>">
+                        </div>
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">
+                                <%= p.nome %>
+                            </h3>
+                            <p class="product-card-price">R$ <%= Number(p.preco || 0).toFixed(2).replace('.', ',' ) %>
+                            </p>
+                            <p class="product-card-condition">Condição: <strong>
+                                    <%= p.condicao || 'Excelente' %>
+                                </strong></p>
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <div style="grid-column: 1 / -1; text-align: center; color: #ffffff; padding: 40px;">
+                                <p>Nenhum produto disponível no momento.</p>
+                            </div>
+                            <% } %>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            &copy; <%= new Date().getFullYear() %> VoltTech.
+                Todos os direitos reservados.
+        </p>
+    </footer>
+
+</body>
+
+</html>

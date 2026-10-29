@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltTech - Gestão de Estoque</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/produtos.css">
+</head>
+
+<body class="admin-body">
+
+    <header class="navbar navbar-admin">
+        <div class="logo">
+            <a href="/admin/dashboard">
+                <img src="/img/VoltTech.png" alt="VoltTech" class="logo-icon"
+                    onerror="this.src='https://via.placeholder.com/40'">
+                <div>
+                    <h1>VoltTech</h1>
+                    <span class="sub-logo">Estoque</span>
+                </div>
+            </a>
+        </div>
+        <div class="admin-header-right">
+            <nav class="nav-links-admin">
+                <a href="/admin/categorias">Categorias</a>
+                <a href="/admin/produtos" class="active">Estoque</a>
+                <a href="/admin/usuarios">Usuários</a>
+                <a href="/admin/contato">Fale Conosco</a>
+                <a href="/logout" class="btn-logout">Sair</a>
+            </nav> 
+            <span class="user-greeting">Bem-vindo, <strong><%= usuarioLogado ? usuarioLogado.nome : 'Administrador' %></strong></span>
+        </div>
+    </header>
+
+    <main class="catalog-container">
+        <div class="catalog-controls">
+            <div class="filter-group">
+                <h2 style="color: #ffffff; font-size: 1.4rem;">Gestão de Estoque (Admin)</h2>
+            </div>
+            <div class="cart-summary">
+                <a href="/admin/produtos/novo" class="btn-primary-action" style="text-decoration: none;">+ Criar
+                    Produto</a>
+            </div>
+        </div>
+
+        <section class="products-grid-catalog" style="margin-top: 24px;">
+            <% if (produtos && produtos.length> 0) { %>
+                <% produtos.forEach(p=> { %>
+                    <div class="product-card-catalog">
+                        <div class="product-card-image">
+                            <img src="<%= p.imagem_url || 'https://via.placeholder.com/300' %>" alt="<%= p.nome %>">
+                        </div>
+
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">
+                                <%= p.nome %>
+                            </h3>
+                            <p class="product-card-price">R$ <%= Number(p.preco || 0).toFixed(2).replace('.', ',' ) %>
+                            </p>
+                            <p class="product-card-condition">
+                                Condição: <strong>
+                                    <%= p.condicao || 'Excelente' %>
+                                </strong> | Qtd: <strong>
+                                    <%= p.quantidade || 0 %> un
+                                </strong>
+                            </p>
+                        </div>
+
+                        <div class="product-card-actions">
+                            <a href="/admin/produtos/editar/<%= p.id %>" class="btn-icon" title="Editar Produto">✏️</a>
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <div style="grid-column: 1 / -1; text-align: center; color: #ffffff; padding: 40px;">
+                                <p>Nenhum produto cadastrado no momento.</p>
+                            </div>
+                            <% } %>
+        </section>
+
+        <!-- Botão Flutuante + do Dashboard -->
+        <a href="/admin/produtos/novo" class="btn-floating-add" title="Cadastrar Produto">+</a>
+    </main>
+
+</body>
+
+</html>

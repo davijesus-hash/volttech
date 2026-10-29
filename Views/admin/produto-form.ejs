@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VoltTech - Cadastro de produto</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body class="admin-body">
+    <header class="navbar navbar-admin">
+        <div class="logo">
+            <a href="/admin/dashboard">
+                <img src="/img/VoltTech.png" alt="VoltTech" class="logo-icon"
+                    onerror="this.src='https://via.placeholder.com/40'">
+                <div>
+                    <h1>VoltTech</h1>
+                    <span class="sub-logo">Cadastro de produto</span>
+                </div>
+            </a>
+        </div>
+        <div class="admin-header-right">
+            <nav class="nav-links-admin">
+                <a href="/admin/categorias">Categorias</a>
+                <a href="/admin/produtos">Estoque</a>
+                <a href="/admin/usuarios">Usuários</a>
+                <a href="/admin/contato">Fale Conosco</a>
+                <a href="/logout" class="btn-logout">Sair</a>
+            </nav> 
+            <span class="user-greeting">Bem-vindo, <strong><%= usuarioLogado ? usuarioLogado.nome : 'Administrador' %></strong></span>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-card form-card-large">
+            <form action="/admin/produtos/salvar" method="POST" class="admin-form">
+                <div class="form-group">
+                    <label>Nome do produto</label>
+                    <input type="text" name="nome" placeholder="Ex: iPhone 13 Pro Max" required class="input-dash">
+                </div>
+
+                <div class="form-group">
+                    <label>Marca</label>
+                    <input type="text" name="marca" placeholder="Ex: Apple" required class="input-dash">
+                </div>
+
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select name="categoria_id" class="input-dash">
+                        <option value="">Selecione uma categoria...</option>
+                        <% if (categorias) { %>
+                            <% categorias.forEach(c=> { %>
+                                <option value="<%= c.id %>">
+                                    <%= c.nome %>
+                                </option>
+                                <% }) %>
+                                    <% } %>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Valor (R$)</label>
+                    <input type="number" step="0.01" name="preco" placeholder="Ex: 3500.00" required class="input-dash">
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label>Quantidade</label>
+                        <input type="number" name="quantidade" placeholder="Ex: 1" required class="input-dash">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantidade mínima</label>
+                        <input type="number" name="qtd_minima" placeholder="Ex: 1" value="5" class="input-dash">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Link da Imagem (URL da Internet)</label>
+                    <input type="url" name="imagem_url" placeholder="https://exemplo.com/foto.jpg" class="input-dash">
+                </div>
+
+                <div class="form-group">
+                    <label>Condição</label>
+                    <div class="segmented-control">
+                        <label><input type="radio" name="condicao" value="Excelente" checked>
+                            <span>Excelente</span></label>
+                        <label><input type="radio" name="condicao" value="Bom"> <span>Bom</span></label>
+                        <label><input type="radio" name="condicao" value="Aceitável"> <span>Aceitável</span></label>
+                    </div>
+                </div>
+
+                <div class="form-actions-right">
+                    <a href="/produtos" class="btn-cancelar">Cancelar</a>
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -5,7 +5,8 @@
 /* Ajuste do Body para não ficar tapado pela navbar fixa */
 .admin-body {
     background-color: #0b7c93;
-    padding-top: 90px; /* Compensação da navbar fixa */
+    padding-top: 90px;
+    /* Compensação da navbar fixa */
 }
 
 /* Header Admin */
@@ -216,6 +217,7 @@
 }
 
 @media (max-width: 960px) {
+
     .metrics-grid,
     .dashboard-content {
         grid-template-columns: 1fr;
@@ -224,4 +226,175 @@
     .form-grid-admin {
         grid-template-columns: 1fr;
     }
+}
+
+/* ==========================================================================
+   ESTILOS DE FORMULÁRIOS E TABELAS (FIGMA)
+   ========================================================================== */
+
+/* Botão de Ação Superior */
+.header-action-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+.btn-primary-action {
+    background-color: #1bbbe1;
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Tabelas */
+.table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 16px 20px;
+    color: #0b7c93;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.data-table td {
+    padding: 14px 20px;
+    color: #334155;
+    border-bottom: 1px solid #f8fafc;
+}
+
+.data-table .text-right {
+    text-align: right;
+}
+
+/* Badges de Status das Tabelas */
+.badge-status {
+    padding: 4px 16px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.status-ativo {
+    background-color: #10b981;
+}
+
+.status-inativo {
+    background-color: #ef4444;
+}
+
+.btn-table-edit {
+    background-color: #10b981;
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Formulários Largos */
+.form-card-large {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Radio buttons estilizados em Segmented Control */
+.segmented-control {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.segmented-control label input {
+    display: none;
+}
+
+.segmented-control label span {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #475569;
+}
+
+.segmented-control label input:checked+span {
+    background-color: #1bbbe1;
+    color: #ffffff;
+    border-color: #1bbbe1;
+}
+
+/* Botões de Ação do Form */
+.form-actions-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-cancelar {
+    background-color: #94a3b8;
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.btn-salvar {
+    background-color: #1bbbe1;
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Botão Flutuante + no Catálogo (MacBook Air - 3) */
+.btn-floating-add {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 56px;
+    height: 56px;
+    background-color: #0b7c93;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s;
+}
+
+.btn-floating-add:hover {
+    transform: scale(1.08);
 }
