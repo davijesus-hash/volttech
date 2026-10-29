@@ -3,7 +3,7 @@
     display: flex;
     padding: 50px 6% 60px 6%;
     color: #ffffff;
-    min-height: calc(100vh - 84px);  
+    min-height: calc(100vh - 84px);
     align-items: center;
 }
 
