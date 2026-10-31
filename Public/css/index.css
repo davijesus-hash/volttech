@@ -59,13 +59,13 @@
 /* ABOUT SECTION */
 .about-section {
     padding: 60px 6%;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
 }
 
 .about-card {
     max-width: 1140px;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
 }
 
 .subtitle {
@@ -89,7 +89,8 @@
 }
 
 .card {
-    background-color: #f8fafc;
+    background-color: #f8f8f8;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 30px 24px;
     border-radius: 16px;
     border: 1px solid #edf2f7;

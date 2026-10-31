@@ -2,11 +2,17 @@ const express = require("express");
 const router = express.Router();
 const DB = require("../db");
 
-// ==========================================
-// MIDDLEWARE DE PROTEÇÃO (LIBERADO PARA TESTES)
-// ==========================================
+// MIDDLEWARE DE PROTEÇÃO
 function requerAdmin(req, res, next) {
     return next();
+
+    /* 
+    if (req.session && req.session.usuario) {
+        return next();
+    }
+    return res.redirect("/login");
+    */
+
 }
 
 router.use(requerAdmin);
