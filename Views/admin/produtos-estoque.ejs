@@ -52,8 +52,8 @@
         </div>
 
         <section class="products-grid-catalog" style="margin-top: 24px;">
-            <% if (produtos && produtos.length> 0) { %>
-                <% produtos.forEach(p=> { %>
+            <% if (produtos && produtos.length > 0) { %>
+                <% produtos.forEach(p => { %>
                     <div class="product-card-catalog">
                         <div class="product-card-image">
                             <img src="<%= p.imagem_url || 'https://via.placeholder.com/300' %>" alt="<%= p.nome %>">
@@ -63,7 +63,7 @@
                             <h3 class="product-card-title">
                                 <%= p.nome %>
                             </h3>
-                            <p class="product-card-price">R$ <%= Number(p.preco || 0).toFixed(2).replace('.', ',' ) %>
+                            <p class="product-card-price">R$ <%= Number(p.preco || 0).toFixed(2).replace('.', ',') %>
                             </p>
                             <p class="product-card-condition">
                                 Condição: <strong>
@@ -74,22 +74,25 @@
                             </p>
                         </div>
 
-                        <div class="product-card-actions" style="display: flex; gap: 8px; justify-content: flex-end;">
-                            <a href="/admin/produtos/editar/<%= p.id %>" class="btn-icon" title="Editar Produto">✏️</a>
+                        <div class="product-card-actions">
+                            <a href="/admin/produtos/editar/<%= p.id %>" class="btn-icon" title="Editar Produto">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
 
-                            <form action="/admin/produtos/deletar/<%= p.id %>" method="POST" style="display: inline;"
+                            <form action="/admin/produtos/deletar/<%= p.id %>" method="POST" class="form-deletar-produto"
                                 onsubmit="return confirm('Deseja realmente excluir o produto <%= p.nome %>?');">
-                                <button type="submit" class="btn-icon" title="Excluir Produto"
-                                    style="background: none; border: none; cursor: pointer;">🗑️</button>
+                                <button type="submit" class="btn-icon" title="Excluir Produto">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
                             </form>
                         </div>
                     </div>
-                    <% }) %>
-                        <% } else { %>
-                            <div style="grid-column: 1 / -1; text-align: center; color: #ffffff; padding: 40px;">
-                                <p>Nenhum produto cadastrado no momento.</p>
-                            </div>
-                            <% } %>
+                <% }) %>
+            <% } else { %>
+                <div style="grid-column: 1 / -1; text-align: center; color: #ffffff; padding: 40px;">
+                    <p>Nenhum produto cadastrado no momento.</p>
+                </div>
+            <% } %>
         </section>
 
         <!-- Botão Flutuante + do Dashboard -->

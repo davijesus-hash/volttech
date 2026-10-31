@@ -124,20 +124,37 @@
 .product-card-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 8px;
+    align-items: center;
+    gap: 6px;
     margin-top: 12px;
 }
 
-.btn-icon {
+.form-deletar-produto {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+/* Botões de Ação Neutros */
+.product-card-actions .btn-icon {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8; /* Cinza neutro suave */
+    text-decoration: none;
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #475569;
-    padding: 4px;
-    border-radius: 50%;
-    transition: color 0.2s;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.btn-icon:hover {
-    color: #0b7c93;
+/* Hover minimalista comum para ambos os ícones */
+.product-card-actions .btn-icon:hover {
+    color: #7dd3fc; /* Destaque azul VoltTech */
+    transform: translateY(-1px); /* Leve elevação imperceptível e elegante */
 }

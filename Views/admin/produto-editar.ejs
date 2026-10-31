@@ -38,7 +38,6 @@
         </div>
     </header>
 
-    <!-- Adicionado margin-top para descer o formulário e ficar abaixo do header -->
     <main class="dashboard-container" style="margin-top: 40px; padding-bottom: 40px;">
         <div class="dashboard-card form-card-large">
             <form action="/admin/produtos/editar/<%= produto.id %>" method="POST" class="admin-form">
@@ -56,12 +55,13 @@
                     <label>Categoria</label>
                     <select name="categoria_id" class="input-dash">
                         <option value="">Selecione uma categoria...</option>
-                        <% if (categorias) { %>
-                            <% categorias.forEach(c=> { %>
-                                <option value="<%= c.id %>" <%=produto.categoria_id===c.id ? 'selected' : '' %>>
+                        <% if (typeof categorias !=='undefined' && categorias && categorias.length> 0) { %>
+                            <% categorias.forEach(function(c) { %>
+                                <option value="<%= c.id %>" <%=Number(produto.categoria_id)===Number(c.id) ? 'selected'
+                                    : '' %>>
                                     <%= c.nome %>
                                 </option>
-                                <% }) %>
+                                <% }); %>
                                     <% } %>
                     </select>
                 </div>
@@ -85,9 +85,23 @@
                     </div>
                 </div>
 
+                <!-- Campo de Imagem com Drag and Drop -->
                 <div class="form-group">
-                    <label>Link da Imagem (URL da Internet)</label>
-                    <input type="url" name="imagem_url" value="<%= produto.imagem_url || '' %>" class="input-dash">
+                    <label>Imagem do Produto</label>
+                    <div id="dropZone" class="label-insert">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span id="dropText" class="label-insert-text">Arraste uma nova imagem para substituir ou 
+                        <strong class="label-insert-text bold">clique para selecionar</strong></span>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    </div>
+
+                    <div id="previewContainer"
+                        style="margin-top: 12px; display: <%= produto.imagem_url ? 'block' : 'none' %>; text-align: center;">
+                        <img id="imgPreview" src="<%= produto.imagem_url || '' %>" alt="Pré-visualização"
+                            style="max-width: 150px; max-height: 150px; border-radius: 6px; border: 1px solid #1bbbe1;">
+                    </div>
+
+                    <input type="hidden" name="imagem_url" id="imagem_url" value="<%= produto.imagem_url || '' %>">
                 </div>
 
                 <div class="form-group">
@@ -99,7 +113,7 @@
                             <span>Excelente</span>
                         </label>
                         <label>
-                            <input type="radio" name="condicao" value="Muito bom" <%=(produto.condicao==='Muito bom' ||
+                            <input type="radio" name="condicao" value="Bom" <%=(produto.condicao==='Muito bom' ||
                                 produto.condicao==='Bom' ) ? 'checked' : '' %>>
                             <span>Bom</span>
                         </label>
@@ -118,6 +132,57 @@
             </form>
         </div>
     </main>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const dropText = document.getElementById('dropText');
+        const imagemInput = document.getElementById('imagem_url');
+        const imgPreview = document.getElementById('imgPreview');
+        const previewContainer = document.getElementById('previewContainer');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        ['dragover', 'dragenter'].forEach(evt => {
+            dropZone.addEventListener(evt, (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = '#1bbbe1';
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(evt => {
+            dropZone.addEventListener(evt, (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = '#64748b';
+            });
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) processarImagem(files[0]);
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) processarImagem(fileInput.files[0]);
+        });
+
+        function processarImagem(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor, selecione apenas arquivos de imagem!');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const base64String = e.target.result;
+                imagemInput.value = base64String;
+                imgPreview.src = base64String;
+                previewContainer.style.display = 'block';
+                dropText.innerHTML = `Nova imagem selecionada: <strong>${file.name}</strong>`;
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
 </body>
 
 </html>
