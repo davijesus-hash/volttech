@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoltTech - Dashboard Admin</title>
+
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="admin-body">
@@ -29,9 +32,11 @@
                 <a href="/admin/produtos">Estoque</a>
                 <a href="/admin/usuarios">Usuários</a>
                 <a href="/admin/contato">Fale Conosco</a>
-                <a href="/logout" class="btn-logout">Sair</a>
             </nav>
             <span class="user-greeting">Bem-vindo, <strong>Administrador</strong></span>
+            <a href="/logout" class="nav-item sair" title="Sair">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
         </div>
     </header>
 
@@ -96,6 +101,7 @@
         <!-- 3. Movimentações Recentes e Gerenciamento de Administradores -->
         <section class="dashboard-content">
 
+            <!-- BLOCO DE MOVIMENTAÇÕES CORRIGIDO -->
             <div class="dashboard-card">
                 <h3>Últimas <span>Movimentações</span></h3>
                 <ul class="stock-list">
@@ -104,23 +110,24 @@
                             <li class="stock-item">
                                 <div class="stock-info">
                                     <strong>
-                                        <%= mov.produto || 'Produto' %>
+                                        <%= mov.produto || mov.produto_nome || mov.nome || 'Produto Sem Nome' %>
                                     </strong>
                                     <small>
-                                        <%= new Date(mov.criado_em).toLocaleDateString('pt-BR') %>
+                                        <%= mov.criado_em ? new Date(mov.criado_em).toLocaleDateString('pt-BR')
+                                            : 'Data n/a' %>
                                     </small>
                                 </div>
                                 <div class="stock-qty">
                                     <span
-                                        class="badge-mov <%= mov.tipo === 'entrada' ? 'badge-entrada' : 'badge-saida' %>">
-                                        <%= mov.tipo==='entrada' ? '+' : '-' %>
-                                            <%= mov.quantidade %> un
+                                        class="badge-mov <%= (mov.tipo && mov.tipo.toLowerCase() === 'entrada') ? 'badge-entrada' : 'badge-saida' %>">
+                                        <%= (mov.tipo && mov.tipo.toLowerCase()==='entrada' ) ? '+' : '-' %>
+                                            <%= mov.quantidade || 0 %> un
                                     </span>
                                 </div>
                             </li>
                             <% }) %>
                                 <% } else { %>
-                                    <li class="stock-item">Nenhuma movimentação.</li>
+                                    <li class="stock-item">Nenhuma movimentação registrada.</li>
                                     <% } %>
                 </ul>
             </div>
@@ -150,7 +157,9 @@
                                 <span class="badge-admin">Ativo</span>
                             </li>
                             <% }) %>
-                                <% } %>
+                                <% } else { %>
+                                    <li class="stock-item">Nenhum administrador cadastrado.</li>
+                                    <% } %>
                 </ul>
             </div>
 

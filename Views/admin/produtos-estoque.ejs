@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoltTech - Gestão de Estoque</title>
+
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/produtos.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="admin-body">
@@ -29,9 +32,11 @@
                 <a href="/admin/produtos" class="active">Estoque</a>
                 <a href="/admin/usuarios">Usuários</a>
                 <a href="/admin/contato">Fale Conosco</a>
-                <a href="/logout" class="btn-logout">Sair</a>
-            </nav> 
-            <span class="user-greeting">Bem-vindo, <strong><%= usuarioLogado ? usuarioLogado.nome : 'Administrador' %></strong></span>
+            </nav>
+            <span class="user-greeting">Bem-vindo, <strong>Administrador</strong></span>
+            <a href="/logout" class="nav-item sair">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
         </div>
     </header>
 
@@ -69,8 +74,14 @@
                             </p>
                         </div>
 
-                        <div class="product-card-actions">
+                        <div class="product-card-actions" style="display: flex; gap: 8px; justify-content: flex-end;">
                             <a href="/admin/produtos/editar/<%= p.id %>" class="btn-icon" title="Editar Produto">✏️</a>
+
+                            <form action="/admin/produtos/deletar/<%= p.id %>" method="POST" style="display: inline;"
+                                onsubmit="return confirm('Deseja realmente excluir o produto <%= p.nome %>?');">
+                                <button type="submit" class="btn-icon" title="Excluir Produto"
+                                    style="background: none; border: none; cursor: pointer;">🗑️</button>
+                            </form>
                         </div>
                     </div>
                     <% }) %>

@@ -3,9 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoltTech - Cadastro de produto</title>
+
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/dashboard.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="admin-body">
@@ -26,9 +30,11 @@
                 <a href="/admin/produtos">Estoque</a>
                 <a href="/admin/usuarios">Usuários</a>
                 <a href="/admin/contato">Fale Conosco</a>
-                <a href="/logout" class="btn-logout">Sair</a>
-            </nav> 
-            <span class="user-greeting">Bem-vindo, <strong><%= usuarioLogado ? usuarioLogado.nome : 'Administrador' %></strong></span>
+            </nav>
+            <span class="user-greeting">Bem-vindo, <strong>Administrador</strong></span>
+            <a href="/logout" class="nav-item sair">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
         </div>
     </header>
 

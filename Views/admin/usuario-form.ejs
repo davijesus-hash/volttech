@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoltTech - Cadastro de Usuário</title>
+
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/dashboard.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="admin-body">
@@ -28,9 +31,11 @@
                 <a href="/admin/produtos">Estoque</a>
                 <a href="/admin/usuarios" class="active">Usuários</a>
                 <a href="/admin/contato">Fale Conosco</a>
-                <a href="/logout" class="btn-logout">Sair</a>
-            </nav> 
-            <span class="user-greeting">Bem-vindo, <strong><%= usuarioLogado ? usuarioLogado.nome : 'Administrador' %></strong></span>
+            </nav>
+            <span class="user-greeting">Bem-vindo, <strong>Administrador</strong></span>
+            <a href="/logout" class="nav-item sair">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
         </div>
     </header>
 
@@ -38,31 +43,38 @@
         <div class="dashboard-card form-card-large">
             <h2 style="color: #0b7c93; margin-bottom: 20px; font-size: 1.3rem;">Cadastrar Novo Usuário</h2>
 
-            <form action="/admin/usuarios/salvar" method="POST" class="admin-form" style="display: flex; flex-direction: column; gap: 16px;">
+            <form action="/admin/usuarios/salvar" method="POST" class="admin-form"
+                style="display: flex; flex-direction: column; gap: 16px;">
                 <div class="form-group">
-                    <label style="font-size: 0.85rem; color: #334155; font-weight: 600; display: block; margin-bottom: 6px;">Nome Completo</label>
+                    <label
+                        style="font-size: 0.85rem; color: #334155; font-weight: 600; display: block; margin-bottom: 6px;">Nome
+                        Completo</label>
                     <input type="text" name="nome" placeholder="Ex: João Silva" required class="input-dash">
                 </div>
 
                 <div class="form-group">
-                    <label style="font-size: 0.85rem; color: #334155; font-weight: 600; display: block; margin-bottom: 6px;">E-mail</label>
+                    <label
+                        style="font-size: 0.85rem; color: #334155; font-weight: 600; display: block; margin-bottom: 6px;">E-mail</label>
                     <input type="email" name="email" placeholder="Ex: joao@volttech.com.br" required class="input-dash">
                 </div>
 
                 <div class="form-group">
-                    <label style="font-size: 0.85rem; color: #334155; font-weight: 600; display: block; margin-bottom: 6px;">Senha</label>
+                    <label
+                        style="font-size: 0.85rem; color: #334155; font-weight: 600; display: block; margin-bottom: 6px;">Senha</label>
                     <input type="password" name="senha" placeholder="••••••••" required class="input-dash">
                 </div>
 
                 <div class="form-group">
-                    <label style="font-size: 0.85rem; color: #334155; font-weight: 600; display: block; margin-bottom: 6px;">Condição / Status</label>
+                    <label
+                        style="font-size: 0.85rem; color: #334155; font-weight: 600; display: block; margin-bottom: 6px;">Condição
+                        / Status</label>
                     <div class="segmented-control">
                         <label>
-                            <input type="radio" name="situacao" value="Ativo" checked> 
+                            <input type="radio" name="situacao" value="Ativo" checked>
                             <span>Ativo</span>
                         </label>
                         <label>
-                            <input type="radio" name="situacao" value="Inativo"> 
+                            <input type="radio" name="situacao" value="Inativo">
                             <span>Inativo</span>
                         </label>
                     </div>
